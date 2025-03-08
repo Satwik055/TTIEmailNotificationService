@@ -2,7 +2,7 @@ package util
 
 import model.EmailTemplate
 
-fun getTransactionUpdateTemplate(status:String, transactionCode:String): EmailTemplate {
+fun getTransactionUpdateEmailTemplate(status:String, transactionCode:String): EmailTemplate {
     return EmailTemplate(
         templateName = "Transaction Update",
         subject = "Transaction Update",

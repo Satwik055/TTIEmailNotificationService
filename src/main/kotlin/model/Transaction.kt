@@ -12,6 +12,7 @@ data class Transaction(
     val currency: CurrencyType,
     val status: TransactionStatus,
     val date:String,
-    val reason:String
+    val reason:String,
+    val sender_id:Int
 )
 

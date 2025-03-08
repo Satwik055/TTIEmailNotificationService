@@ -19,7 +19,7 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:3.0.3")
     implementation("io.ktor:ktor-client-core:3.0.3")
     implementation("com.resend:resend-java:3.1.0") // Replace with the correct version
-
+    implementation("com.google.firebase:firebase-admin:9.4.3") // Use the latest version
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
 

@@ -7,7 +7,7 @@ import model.EmailTemplate
 import java.util.logging.Logger
 
 
-val logger: Logger = Logger.getLogger("Email Logger")
+private val logger: Logger = Logger.getLogger("Email Logger")
 
 fun sendEmail(recipientAddress:String, template: EmailTemplate){
     try {
