@@ -1,3 +1,5 @@
+
+
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -43,7 +45,6 @@ suspend fun listenTransactionStatusChanges(supabaseClient: SupabaseClient){
     }.launchIn(CoroutineScope(currentCoroutineContext()))
     channel.subscribe()
 }
-
 fun main() = runBlocking{
     val supabase =  createSupabaseClient(
         supabaseUrl = "https://fqsnwalptczelvhiwohd.supabase.co",
