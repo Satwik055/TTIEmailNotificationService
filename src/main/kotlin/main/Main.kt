@@ -1,3 +1,5 @@
+package main
+
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -8,15 +10,16 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.json.Json
 import model.Transaction
+import service.*
 import util.getTransactionUpdateMessageTemplate
 import util.getTransactionUpdateEmailTemplate
-import util.sendEmail
 import java.util.logging.Logger
 
 private val logger: Logger = Logger.getLogger("Root Logger")
 
 suspend fun listenTransactionStatusChanges(supabaseClient: SupabaseClient){
-    initializeFirebaseAdmin()
+    FirebaseAdmin.initializeFirebaseAdmin()
+
     val channel = supabaseClient.channel("transaction_channel")
     val changeFlow = channel.postgresChangeFlow<PostgresAction.Update>(schema = "public") {
         table = "transaction"
@@ -25,16 +28,16 @@ suspend fun listenTransactionStatusChanges(supabaseClient: SupabaseClient){
         val transaction = Json.decodeFromString<Transaction>(update.record.toString())
         logger.info("Updated transaction status with of id ${transaction.id} to: ${transaction.status}")
 
-        val fcmDeviceToken = getFcmToken(transaction.sender_id, supabaseClient)
+        val fcmDeviceToken = UserService.getFcmToken(transaction.sender_id, supabaseClient)
         val messageTemplate = getTransactionUpdateMessageTemplate(transaction.status.name, transaction.transaction_code)
 
-        sendPushNotification(
+        PushMessagingService.sendPushNotification(
             deviceToken = fcmDeviceToken,
             template = messageTemplate
         )
 
         val emailTemplate = getTransactionUpdateEmailTemplate(transactionCode = transaction.transaction_code, status = transaction.status.name)
-        sendEmail(
+        EmailService.sendEmail(
             recipientAddress = transaction.email,
             template = emailTemplate
         )
