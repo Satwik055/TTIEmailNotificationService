@@ -20,8 +20,12 @@ import java.util.logging.Logger
 
 private val logger: Logger = Logger.getLogger("Push Message Logger")
 
+
+
 fun initializeFirebaseAdmin() {
-    val serviceAccount = FileInputStream("src/main/kotlin/transfertoinr-firebaseadmin-privatekey.json")
+
+
+    val serviceAccount = FileInputStream("src/main/kotlin/firebase-admin-key.json")
     val options = FirebaseOptions.Builder()
         .setCredentials(GoogleCredentials.fromStream(serviceAccount))
         .build()
