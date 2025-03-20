@@ -1,5 +1,3 @@
-
-
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
@@ -14,8 +12,6 @@ import util.getTransactionUpdateMessageTemplate
 import util.getTransactionUpdateEmailTemplate
 import util.sendEmail
 import java.util.logging.Logger
-
-
 
 private val logger: Logger = Logger.getLogger("Root Logger")
 

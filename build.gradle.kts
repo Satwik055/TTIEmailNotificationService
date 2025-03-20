@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.cli.jvm.compiler.findMainClass
+
 plugins {
     kotlin("jvm") version "2.0.0"
     kotlin("plugin.serialization") version "2.0.0"
@@ -5,8 +7,9 @@ plugins {
 
 }
 
+
 application{
-    mainClass.set("com.example.Main")
+    mainClass.set("MainKt")
 }
 
 
