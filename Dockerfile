@@ -11,4 +11,6 @@ COPY gradlew.bat .
 
 RUN chmod +x gradlew
 
+RUN gradle build --no-daemon
+
 CMD ["gradle", "run"]
