@@ -25,7 +25,8 @@ suspend fun listenTransactionStatusChanges(supabaseClient: SupabaseClient){
         table = "transaction"
     }
     changeFlow.onEach { update ->
-        val transaction = Json.decodeFromString<Transaction>(update.record.toString())
+        val json = Json{ignoreUnknownKeys = true}
+        val transaction = json.decodeFromString<Transaction>(update.record.toString())
         logger.info("Updated transaction status with of id ${transaction.id} to: ${transaction.status}")
 
         val fcmDeviceToken = UserService.getFcmToken(transaction.sender_id, supabaseClient)

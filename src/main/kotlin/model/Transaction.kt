@@ -14,6 +14,7 @@ data class Transaction(
     val date:String,
     val reason:String,
     val sender_id:Int,
+    val screenshot:String,
     val recipient_id:Int
 )
 
