@@ -4,10 +4,11 @@ import com.resend.Resend
 import com.resend.core.exception.ResendException
 import com.resend.services.emails.model.CreateEmailOptions
 import model.EmailTemplate
-import java.util.logging.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 
-private val logger: Logger = Logger.getLogger("Email Logger")
+private val logger: Logger = LoggerFactory.getLogger("Email Logger")
 
 object EmailService{
     fun sendEmail(recipientAddress: String, template: EmailTemplate) {
@@ -22,9 +23,9 @@ object EmailService{
             resend.emails().send(params)
             logger.info("Email with template *${template.templateName}* successfully sent to $recipientAddress")
         } catch (e: ResendException) {
-            println(e.message)
+            logger.error(e.message)
         } catch (e: Exception) {
-            println(e.message)
+            logger.error(e.message)
         }
     }
 }

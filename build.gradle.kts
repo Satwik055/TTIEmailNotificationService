@@ -26,7 +26,14 @@ dependencies {
     implementation("io.ktor:ktor-client-core:3.0.3")
     implementation("com.resend:resend-java:3.1.0")
     implementation("com.google.firebase:firebase-admin:9.4.3")
+
+    //Logtail Logging
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+    implementation ("com.logtail:logback-logtail:0.3.3")
+    implementation("ch.qos.logback:logback-classic:1.5.13")
+    implementation("ch.qos.logback:logback-core:1.5.13")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.5")
+
 
     testImplementation(kotlin("test"))
 }

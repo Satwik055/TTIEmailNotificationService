@@ -3,11 +3,11 @@ package service
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
+import org.slf4j.LoggerFactory
 import java.io.FileInputStream
-import java.util.logging.Logger
 
 object FirebaseAdmin{
-    private val logger = Logger.getLogger("Firebase Admin")
+    private val logger = LoggerFactory.getLogger("Firebase Admin")
 
     fun initializeFirebaseAdmin() {
         val serviceAccount = FileInputStream("src/main/kotlin/firebase-admin-key.json")

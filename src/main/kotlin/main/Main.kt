@@ -11,12 +11,12 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.serialization.json.Json
 import model.CurrencyType
 import model.Transaction
-import model.TransactionStatus
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import service.*
 import util.*
-import java.util.logging.Logger
 
-private val logger: Logger = Logger.getLogger("Root Logger")
+private val logger: Logger = LoggerFactory.getLogger("Root Logger")
 
 suspend fun listenTransactionStatusChanges(supabaseClient: SupabaseClient){
     FirebaseAdmin.initializeFirebaseAdmin()
@@ -30,6 +30,8 @@ suspend fun listenTransactionStatusChanges(supabaseClient: SupabaseClient){
         table = "transaction"
     }
 
+
+    //Email on new transaction
     insertFlow.onEach { insertion ->
         val json = Json{ignoreUnknownKeys = true}
         val transaction = json.decodeFromString<Transaction>(insertion.record.toString())
@@ -76,6 +78,8 @@ suspend fun listenTransactionStatusChanges(supabaseClient: SupabaseClient){
 
     }.launchIn(CoroutineScope(currentCoroutineContext()))
 
+
+    //Email sent on updating transaction status
     changeFlow.onEach { update ->
         val json = Json{ignoreUnknownKeys = true}
         val transaction = json.decodeFromString<Transaction>(update.record.toString())

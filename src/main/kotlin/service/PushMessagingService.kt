@@ -1,14 +1,15 @@
 package service
 
-import java.util.logging.Logger
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
 import com.google.firebase.messaging.Notification
 import model.MessageTemplate
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 
 object PushMessagingService{
-    private val logger: Logger = Logger.getLogger("Push Message Service")
+    private val logger: Logger = LoggerFactory.getLogger("Push Message Service")
 
     fun sendPushNotification(deviceToken: String, template: MessageTemplate) {
         val notification = Notification.builder()
@@ -23,7 +24,7 @@ object PushMessagingService{
             val response = FirebaseMessaging.getInstance().send(message)
             logger.info("Successfully sent message: $response")
         } catch (e: Exception) {
-            logger.info("Error sending message: ${e.message}")
+            logger.error("Error sending message: ${e.message}")
         }
     }
 }
